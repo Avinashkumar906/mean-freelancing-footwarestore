@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="w-100 text-center py-2">
+            <button class="mx-1 btn btn-primary" [routerLink]="['/admin','product']" type="button">Add Product</button>
+            <button class="mx-1 btn btn-primary" [routerLink]="['/admin','uproduct']" type="button">Manage Product</button>
+            <button class="mx-1 btn btn-primary" [routerLink]="['/admin','user']" type="button">Manage User</button>
+            <button class="mx-1 btn btn-primary" [routerLink]="['/admin','order']" type="button">Manage Order</button>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

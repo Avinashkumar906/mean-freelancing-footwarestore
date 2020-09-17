@@ -1,0 +1,26 @@
+<div class="d-block mx-auto py-4">
+    <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && submit()" class="d-block m-auto py-4" style="max-width: 450px;">
+        <h2 class="h2 text-center mb-3">Login</h2>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter email" >
+            <small *ngIf="loginFormControl.email.invalid && (loginFormControl.email.touched && loginFormControl.email.dirty)" class="form-text text-muted">Enter a valid email !</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Password" >
+            <small *ngIf="loginFormControl.password.invalid && (loginFormControl.password.touched && loginFormControl.password.dirty)" class="form-text text-muted">Min length 6, Max length 20 and must be alpha numeric</small>
+        </div>
+        <div class="text-center">
+            <div *ngIf="message;else spinner" >
+                <h5 class="h5 my-2 text-center">
+                    {{message}}
+                </h5>
+                <button type="submit" class="btn btn-dark" [disabled]="loginForm.invalid">Submit</button>
+            </div>
+            <ng-template #spinner>
+                Please wait...
+            </ng-template>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <div class="chip m-1" [ngClass]="{'active':key===''}" (click)="filter('')">
+                #All
+            </div>
+            <div class="chip m-1" [ngClass]="{'active':key==='completed'}" (click)="filter('completed')">
+                #Completed
+            </div>
+            <div class="chip m-1" [ngClass]="{'active':key==='placed'}" (click)="filter('placed')">
+                #Placed
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Delete</th>                        
+                        <th scope="col">Complete</th>
+                        <th scope="col">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of orderList | filterOrder:key; let i = index" class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{totalPrice(item)}} &euro;</td>
+                        <td><span class="btn btn-dark" (click)="delete(item)">Delete</span></td>
+                        <td *ngIf="item.status === 'placed'"><span class="btn btn-dark" (click)="markCompleted(item)">Mark Complete</span></td>
+                        <td *ngIf="item.status !== 'placed'">Completed</td>
+                        <td><span class="btn btn-dark" [routerLink]="['/orderdetail',item._id]">View</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

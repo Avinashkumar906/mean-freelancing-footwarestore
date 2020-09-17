@@ -1,0 +1,21 @@
+.adjust{
+    bottom: 0;
+    background: url(/assets/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100% !important;
+    top: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
+}
+.center{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 0;
+    h2{
+        letter-spacing: 5px;
+    }
+}

@@ -1,0 +1,31 @@
+<div class="d-block mx-auto py-4">
+    <form [formGroup]="signupForm" (ngSubmit)="signupForm.valid && submit()" class="d-block m-auto py-4" style="max-width: 450px;">
+        <h2 class="h2 text-center mb-3">Sign Up</h2>
+        <div class="form-group">
+            <label for="exampleInputEmail1">User Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter name" >
+            <small *ngIf="signupFormControl.name.invalid && (signupFormControl.name.touched && signupFormControl.name.dirty)" class="form-text text-muted">Name must be 4 character long !</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter email" >
+            <small *ngIf="signupFormControl.email.invalid && (signupFormControl.email.touched && signupFormControl.email.dirty)" class="form-text text-muted">Enter a valid email !</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Password" >
+            <small *ngIf="signupFormControl.password.invalid && (signupFormControl.password.touched && signupFormControl.password.dirty)" class="form-text text-muted">Min length 6, Max length 20 and must be alpha numeric</small>
+        </div>
+        <div class="text-center">
+            <div *ngIf="message;else spinner">
+                <h5 class="h5 my-2 text-center">
+                    {{message}}
+                </h5>
+                <button type="submit" class="btn btn-dark" [disabled]="signupForm.invalid">Submit</button>
+            </div>
+            <ng-template #spinner>
+                Please Wait...
+            </ng-template>
+        </div>
+    </form>
+</div>

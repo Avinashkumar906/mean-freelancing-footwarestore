@@ -1,0 +1,43 @@
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="h2">Search order.</h2>
+            <div class="form-group my-4" style="max-width: 400px;">
+                <input type="text" class="form-control" placeholder="Search by order id!" [(ngModel)]="orderId">
+                <span class="btn btn-dark my-1" [routerLink]="['/orderdetail',orderId]">Search</span>
+            </div>
+        </div>
+        <div class="col-12 py-4" *ngIf="user;else noUser">
+            <h4 class="h4">Hi {{user && user?.name}}</h4>
+            <span class="btn btn-dark my-1" (click)="fetchOrders()">Refresh Recent Orders</span>
+            <!-- table view of recent orders -->
+            <table class="table" *ngIf="orderList.length != 0;">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Order by</th>
+                        <th scope="col">User mail</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of orderList;let i = index" class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{totalPrice(item)}} &euro;</td>
+                        <td><span class="btn btn-dark" [routerLink]="['/orderdetail',item._id]">View</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 *ngIf="noOrder">No recent order found !</h5>
+        </div>
+        <ng-template #noUser>
+            <div class="col-12 py-4">
+                <h4 class="h4">login to view recent purchases</h4>
+                <span class="btn btn-dark" [routerLink]="['/signin']">Go to Signin</span>
+            </div>
+        </ng-template>
+    </div>
+</div>

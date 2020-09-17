@@ -1,0 +1,39 @@
+<div *ngIf="!error;else noProduct">
+    <div class="container py-2">
+        <div class="row align-item-center justify-content-center">
+            <div class="col-8">
+                <h2 class="h2 my-4 text-center">{{product.name}}</h2>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-sm-5">
+                <div style="overflow: hidden;">
+                    <img [src]='env.api + product.image' class="d-block mx-auto" height="300px">
+                </div>
+                <p class="px-2 py-1 my-0 text-center">
+                    <small class="d-block text-muted" *ngIf="product.quantity >20 ">*Available in stock*</small>
+                    <small class="d-block text-muted" *ngIf="product.quantity <= 20 ">{{product.quantity <= 0 ? 'Out of stock!' : "Hurry " + product.quantity + " Left only !"}}</small>
+                    <button class="btn btn-dark m-1" (click)="addToOrder(product)" [disabled]="!product.selectedSize"> Add to Cart</button>
+                </p>
+            </div>
+            <div class="col-sm-7 h-100">
+                <p class="py-0 my-0"><strong>Brand :</strong> {{product.company}}</p>
+                <h4 class="h4">Price: {{product.cost}} &euro; only.</h4>
+                <div class="form-group pt-3 w-50">
+                    <p class="m-0">Please select size :</p>
+                    <select class="form-control" [(ngModel)]="product.selectedSize" >
+                        <option *ngFor="let item of product.size" value="{{item}}" class="form-control">{{item}}</option>
+                    </select>
+                </div>
+                <div class="py-2">
+                    <h3 class="h3">Description</h3>
+                    {{product.description}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noProduct>
+    <div class="my-4 text-center">
+        <h1 class="text-center"> No product found!</h1>
+    </div>
+</ng-template>

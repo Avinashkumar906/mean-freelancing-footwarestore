@@ -1,0 +1,25 @@
+<div *ngIf="isAppLoaded;else loader" class="d-flex flex-column" style="min-height: 100vh;">
+  <!-- navigation bar -->
+  <div class="float-top">
+    <app-navbar></app-navbar>
+  </div>
+
+  <!-- Main content -->
+  <div class="flex-fill" style="padding-top: 56px;">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- loader template on app load below -->
+<ng-template #loader>
+  <div class="loader-container">
+    <div class="center">
+      <div class="spinner-border" role="status" *ngIf="!err">
+      </div>
+      <div *ngIf="err">
+        <h2>Server Error!</h2>
+        <p>Please check internet connectivity!</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

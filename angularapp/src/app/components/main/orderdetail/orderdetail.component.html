@@ -1,0 +1,55 @@
+<div class="container py-4" >
+    <div class="row" *ngIf="order && order.items.length > 0">
+        <div class="col-12">
+            <h2 class="h2 mt-4">Invoice</h2>
+            <p class="mb-4">Order ID : {{order._id}}</p>
+        </div>
+        <div class="col-6">
+            <p><strong>Name : </strong> {{order.name}}</p>
+        </div>
+        <div class="col-6">
+            <p><strong>Email : </strong> {{order.email}}</p>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12">
+            <table class="table" *ngIf="order.items.length != 0;">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of order.items;let i = index" class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.company}}</td>
+                        <td>{{item.selectedSize}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.cost}}&nbsp;&euro;</td>
+                        <td>{{item.cost * item.quantity}}&nbsp;&euro;</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td colspan="5"></td>
+                        <td><strong>Total :</strong></td>
+                        <td><strong>{{totalPrice()}}&nbsp;&euro;</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <p><strong>Shipping Address : </strong> <br/>{{order.address}}</p>
+        </div>
+    </div>
+    <div class="row" *ngIf="!order || err">
+        <div class="col-12">
+            <h2 class="h2 text-center">No detail found for order:</h2>
+            <p class="text-center">Order id : {{id}}</p>
+        </div>
+    </div>
+</div>

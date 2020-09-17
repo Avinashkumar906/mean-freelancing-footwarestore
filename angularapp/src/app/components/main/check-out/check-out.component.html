@@ -1,0 +1,99 @@
+<div class="container-fluid bg-light my-2 py-4">
+    <div class="row" *ngIf="user; else noUser">
+        <div class="col-12 mt-4 mb-2">
+            <h3 class="h3 mb-4">
+                Shopping cart:
+            </h3>
+        </div>
+        <div class="col-md-8">
+            <!-- preview order -->
+            <div class="px-2 py-3" *ngIf="order.items.length != 0" style="border: 1px solid grey;border-radius: 10px">
+                <div class="w-100">
+                    <span class="h6 d-block my-2">Cart item details:</span>
+                </div>
+                <table class="table" >
+                    <thead class="thead-light">
+                        <tr class="text-center">
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Size</th>
+                            <th scope="col">Add</th>
+                            <th scope="col">Remove</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of order.items;let i = index" class="text-center">
+                            <td><span [routerLink]="['/product','detail',item._id]"
+                                    style="cursor: pointer;text-decoration: underline;">{{item.name}}</span></td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.selectedSize}}</td>
+                            <td><span class="btn btn-dark btn-sm" (click)="addMore(item)">+&nbsp;1</span></td>
+                            <td><span class="btn btn-dark btn-sm" (click)="remove(item)"> -&nbsp;1</span></td>
+                            <td>{{item.cost * item.quantity}}&nbsp;&euro;</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td colspan="4"></td>
+                            <td><strong>Total Payable:</strong></td>
+                            <td><strong>{{getTotal()}}&nbsp;&euro;</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4" >
+            <!-- checkout form -->
+            <form class="px-2 py-3" [formGroup]="userForm" *ngIf="order.items.length != 0" (ngSubmit)="userForm.valid && checkOut()" style="border: 1px solid grey;border-radius: 10px;">
+                <div class="row">
+                    <div class="col-12">
+                        <span class="h6 d-block my-2">Fill shipping detail:</span>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <!-- <label for="">Name</label> -->
+                            <input class="form-control" type="text" formControlName="name" placeholder="Enter Name">
+                            <small class="text-muted"
+                                *ngIf="userFormControl.name.invalid && (userFormControl.name.touched && userFormControl.name.dirty)">Please
+                                Enter Name!</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 d-none">
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input class="form-control" type="text" formControlName="email" placeholder="Enter Email">
+                            <small class="text-muted"
+                                *ngIf="userFormControl.email.invalid && (userFormControl.email.touched && userFormControl.email.dirty)">Please
+                                Enter Email!</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <!-- <label for="">Shipping address</label> -->
+                            <textarea class="form-control" rows="3" formControlName="address"
+                                placeholder="Enter Shipping address"></textarea>
+                            <small class="text-muted"
+                                *ngIf="userFormControl.address.invalid && (userFormControl.address.touched && userFormControl.address.dirty)">Enter
+                                valid shipping address!</small>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-center" *ngIf="!submitted">
+                            <button type="submit" class="btn btn-dark" [disabled]="userForm.invalid">Place Order</button>
+                        </div>
+                        <p class="text-center" *ngIf="submitted">Placing order.. please wait.</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ng-template #noUser>
+        <div class="w-100 text-center">
+            <div class="h2">Please Signin to place order !</div>
+            <span class="btn btn-dark" [routerLink]="['/signin']">Go to Signin!</span>
+        </div>
+    </ng-template>
+    <div class="w-100 my-2 py2 text-center" *ngIf="order.items.length === 0 && user">
+        <h3 class="h3">No Item In Cart!</h3>
+        <span class="btn btn-dark" [routerLink]="['/product']">Go to Shop</span>
+    </div>
+</div>

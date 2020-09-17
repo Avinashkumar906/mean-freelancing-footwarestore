@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <div class="chip m-1" [ngClass]="{'active':key===''}" (click)="filter('')">
+                #All
+            </div>
+            <div class="chip m-1" [ngClass]="{'active':key==='ost'}" (click)="filter('ost')">
+                #Out of stock
+            </div>
+            <div class="chip m-1" [ngClass]="{'active':key==='ist'}" (click)="filter('ist')">
+                #In Stock
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table mx-auto p-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of tempList;let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{product.name}}</td>
+                        <td>{{product.company}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.cost}}</td>
+                        <td><span class="btn btn-sm btn-dark" [routerLink]="['/admin','product']" [queryParams]="{_id:product._id}">Update</span></td>
+                        <td><span class="btn btn-sm btn-dark" (click)="delete(product)">Delete</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

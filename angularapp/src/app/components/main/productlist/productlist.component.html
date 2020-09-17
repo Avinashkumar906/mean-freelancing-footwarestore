@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center mt-4">
+            <div class="form-group mx-auto my-2 w-auto" style="max-width: 400px;">
+                <input type="text" class="form-control" placeholder="Search from wide variety of sneakers !" [(ngModel)]="key">
+            </div>
+        </div>
+        <hr/>
+        <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let item of productList | searchProduct:key;let i = index">
+            <div class="card my-2 d-block mx-auto" [routerLink]="['/product','detail',item._id]" style="max-width: 18rem;cursor: pointer;">
+                <div class="mx-2 mt-2" style="height: 200px;overflow: hidden;">
+                    <img [src]='env.api+item.image' class="card-img-top w-auto d-block mx-auto" height="100%" >
+                </div>
+                <div class="card-body text-center">
+                  <h5 class="h5 card-title" style="min-height: 50px;">{{item.name}}</h5>
+                  <h6 class="h6 card-text">{{item.cost}} &euro;</h6>
+                  <span class="text-center">Available in {{item.size.length}} Size!</span>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
