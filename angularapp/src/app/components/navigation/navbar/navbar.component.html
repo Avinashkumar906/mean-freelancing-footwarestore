@@ -43,6 +43,7 @@
     </ng-template>
 </div>
 <div class="checkout" [routerLink]="['/checkout']">
-    <img class="cart-icon" src="/assets/cart-icon.png" width="40px" height="40px">
+    <span class="cart-icon"><i class="fa fa-shopping-cart"></i></span>
+    <!-- <img class="cart-icon" src="/assets/cart-icon.png" width="40px" height="40px"> -->
     <span class="badge badge-primary">{{getCount() == 0 ? '' : getCount()}}</span>
 </div>
